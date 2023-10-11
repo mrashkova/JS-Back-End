@@ -3,10 +3,6 @@ const bcrypt = require("bcrypt");
 const jwt = require("../lib/jwt");
 const { SECRET } = require("../constants");
 
-// 3 - Layer architecture
-// Controller -> Service -> Domain Model
-// if (rpass === pass)
-
 exports.register = (userData) => {
   return User.create(userData);
 };
@@ -14,17 +10,13 @@ exports.register = (userData) => {
 exports.login = async (username, password) => {
   const user = await User.findOne({ username });
 
-  //   validate username
+  // validate username
   if (!user) {
     throw new Error("Invalid username or password!");
   }
 
-  //   validate password
+  // validate password
   const isValid = await bcrypt.compare(password, user.password);
-  console.log(isValid);
-  console.log({ password1: isValid });
-  console.log({ password2: isValid });
-
   if (!isValid) {
     throw new Error("Invalid username or password!");
   }
@@ -33,6 +25,7 @@ exports.login = async (username, password) => {
     _id: user._id,
     username: user.username,
   };
+
   const token = await jwt.sign(payload, SECRET, { expiresIn: "3d" });
 
   return token;
