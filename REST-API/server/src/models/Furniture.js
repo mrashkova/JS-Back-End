@@ -1,16 +1,16 @@
 const mongoose = require("mongoose");
 
-const furtnitureSchema = new mongoose.Schema({
+const furnitureSchema = new mongoose.Schema({
   make: { type: String, required: true },
   model: { type: String, required: true },
-  year: { type: Number, required: true },
+  year: { type: String, required: true },
   description: { type: String, required: true },
-  img: { type: String, required: true },
-  price: { type: Number, required: true },
+  price: { type: String, required: true },
   material: { type: String, required: true },
+  img: { type: String, required: true },
   _ownerId: { type: mongoose.Types.ObjectId, ref: "User" },
 });
 
-const Furtniture = mongoose.model("Furniture", furtnitureSchema);
+const Furtiture = mongoose.model("Furniture", furnitureSchema);
 
-module.exports = Furtniture;
+module.exports = Furtiture;
