@@ -31,6 +31,7 @@ const bodyValidatePassword = body("password")
 
 const bodyValidateEmail = body("email")
   .isEmail()
+  .normalizeEmail()
   .withMessage("Invalid email from express validator");
 
 app.post("/", bodyValidateEmail, bodyValidatePassword, (req, res) => {
